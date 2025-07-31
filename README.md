@@ -65,25 +65,3 @@ Your frontend should now be running and accessible at http://localhost:5173
 (or another port if 5173 is in use)
 
 
-## System Architecture Diagram
-
-```mermaid
-graph TD
-    subgraph "User's Device"
-        User[👤 User] --> Browser[🌐 Web Browser]
-    end
-
-    subgraph "Client-Side (SPA)"
-        Browser --> Frontend[React Frontend]
-    end
-
-    subgraph "Server-Side"
-        Backend[FastAPI Backend API]
-    end
-    
-    subgraph "Data Layer"
-        DataSource[📄 data.csv]
-    end
-
-    Frontend -- "REST API (JSON)" --> Backend
-    Backend -- "Reads Data" --> DataSource
