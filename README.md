@@ -30,6 +30,9 @@ The backend server provides the data for the application.
 # Navigate to the backend directory
 cd backend
 
+# Install the required Python packages
+pip install fastapi uvicorn pandas SQLAlchemy
+
 # Create a Python virtual environment
 python -m venv venv
 
@@ -39,11 +42,10 @@ source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
 
-# Install the required Python packages
-pip install -r requirements.txt
-
 # Run the FastAPI server
 uvicorn main:app --reload
+
+Your backend should now be running at http://127.0.0.1:8000.
 
 2.Frontend Setup
 The frontend is a React application that displays the data. Open a new terminal window for this step.
@@ -61,3 +63,27 @@ npm run dev
 
 Your frontend should now be running and accessible at http://localhost:5173 
 (or another port if 5173 is in use)
+
+
+## System Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph "User's Device"
+        User[👤 User] --> Browser[🌐 Web Browser]
+    end
+
+    subgraph "Client-Side (SPA)"
+        Browser --> Frontend[React Frontend]
+    end
+
+    subgraph "Server-Side"
+        Backend[FastAPI Backend API]
+    end
+    
+    subgraph "Data Layer"
+        DataSource[📄 data.csv]
+    end
+
+    Frontend -- "REST API (JSON)" --> Backend
+    Backend -- "Reads Data" --> DataSource
